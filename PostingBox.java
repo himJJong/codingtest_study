@@ -1,5 +1,5 @@
 import java.util.*;
-public class Package_Box {
+public class PostingBox {
     public int solution(int[] order) {
         int target=0; // 1번 상자 부터(인덱스는 0)
         Stack<Integer> stack = new Stack<>(); // 보조 컨테이너 벨트
