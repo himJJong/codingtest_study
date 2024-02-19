@@ -1,4 +1,4 @@
-public class 햣 SpeckDot {
+public class SpeckDot {
     public static void main(String[] args) {
 
     }
