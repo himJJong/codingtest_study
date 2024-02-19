@@ -1,4 +1,4 @@
-public class SpeckDot {
+public class 햣 SpeckDot {
     public static void main(String[] args) {
 
     }
@@ -10,7 +10,6 @@ public class SpeckDot {
         return ans;
     }
 }
-
 /**
  * 문제 해석
  * (0,0) 원점에서부터
