@@ -1,5 +1,7 @@
+import java.util.*;
+
 public class pro_해시테이블함수 {
-    import java.util.*;
+
 
     class Solution {
         public int solution(int[][] data, int col, int row_begin, int row_end) {
