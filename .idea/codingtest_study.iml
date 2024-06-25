@@ -10,12 +10,15 @@
       <sourceFolder url="file://$MODULE_DIR$/24_05_13" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/24_05_28" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/24_06_12" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/24_06_25" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/24_01_23" />
       <excludeFolder url="file://$MODULE_DIR$/24_02_06" />
       <excludeFolder url="file://$MODULE_DIR$/24_02_14" />
       <excludeFolder url="file://$MODULE_DIR$/24_03_21" />
       <excludeFolder url="file://$MODULE_DIR$/24_05_13" />
       <excludeFolder url="file://$MODULE_DIR$/24_05_28" />
+      <excludeFolder url="file://$MODULE_DIR$/24_06_12" />
+      <excludeFolder url="file://$MODULE_DIR$/24_06_18" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
