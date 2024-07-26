@@ -21,10 +21,10 @@ public class codeTree_2배보다 {
 
         // dp 배열을 채웁니다.
         for (int i = 2; i <= n; i++) {
-            for (int j = m; j >= 1; j--) {
-                dp[i][j] = 0;
-                for (int k = j / 2; k >= 1; k--) {
-                    dp[i][j] = (dp[i][j] + dp[i-1][k]) % Div;
+            for (int j = 1; j <= m; j++) {
+                for (int k = 1; k <= j/2; k++) {
+                    dp[i][j] += (dp[i-1][k]) % Div;
+                    System.out.println("i값:"+i +" j값:" +j + " k값:"+k + " dp[i][j]: "+dp[i][j] + " dp[i-1][k]: "+dp[i-1][k]);
                 }
             }
         }
