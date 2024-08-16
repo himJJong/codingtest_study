@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class codeTree_사삭채우기2 {
+public class codeTree_사각채우기2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
