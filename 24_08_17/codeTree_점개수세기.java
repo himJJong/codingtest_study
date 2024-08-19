@@ -1,5 +1,4 @@
 import java.util.*;
-import java.io.*;
 
 public class codeTree_점개수세기 {
     static class Pair {
@@ -78,6 +77,7 @@ public class codeTree_점개수세기 {
 
             prefixSum[newX][newY]++;
         }
+        
 
         for(int i = 1; i <= cnt; i++)
             for(int j = 1; j <= cnt; j++)
