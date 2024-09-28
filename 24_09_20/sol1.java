@@ -1,6 +1,16 @@
 import java.util.*;
 import java.io.*;
+/*
+find -> O(N)
+union -> find 2번 -> O(N)
+add -> O(1)
+getGroupSizes -> O(N^2)
+main -> O(M * N)
 
+O(M*N + N^2)
+M 연결정보수
+N 노드수
+ */
 public class sol1 {
     static class UnionFind {
         private Map<Integer, Integer> parent = new HashMap<>();
