@@ -7,12 +7,12 @@ public class sol4 {
     public static void main(String[] args)throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int n = Integer.parseInt(br.readLine());
-        String[] hintWords = new String[n];
-        int[] correct = new int[n];
-        int[] halfCorrect = new int[n];
+        int hintCount = Integer.parseInt(br.readLine());
+        String[] hintWords = new String[hintCount];
+        int[] correct = new int[hintCount];
+        int[] halfCorrect = new int[hintCount];
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < hintCount; i++) {
             String[] hint = br.readLine().split(" ");
             hintWords[i] = hint[0];
             correct[i] = Integer.parseInt(hint[1]);
@@ -37,7 +37,7 @@ public class sol4 {
         List<String> answerList = new ArrayList<>();
         for (String curWord : totalWords) {
             boolean check = true;
-            for (int i = 0; i < n; i++) {   // 조건에 따른 check 결정
+            for (int i = 0; i < hintCount; i++) {   // 조건에 따른 check 결정
                 if (!isHintSatisfied(curWord, hintWords[i], correct[i], halfCorrect[i])) {
                     check = false;
                     break;
