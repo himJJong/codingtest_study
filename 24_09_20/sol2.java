@@ -4,12 +4,9 @@ import java.util.*;
 /*
 Trie 문자열 탐색
 조건이 있음. 소문자 대문자 거나 문자열 길이가 길면 메모리 사용량이 많아짐.
-insert 메서드: O(M)
-containsSubstring 메서드: O(N * M)
-전체 시간 복잡도: O(N^2 * M)
-O(N) ( O(M) + O(NM)  )
-(O(NM) + O(N^2 * 100))
-// 1000000
+containsSubstring 메서드를 호출하는데, 이때 시간 복잡도는 O(N^2)입니다.
+insert 메서드를 호출하는데, 시간 복잡도는 O(M)입니다.
+단어의 개수가 n이므로 전체 시간 복잡도는 최악의 경우 O(n * (N^2 + M))
 */
 class sol2 {
     static class TrieNode {
