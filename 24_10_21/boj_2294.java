@@ -6,24 +6,23 @@ public class boj_2294 {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
-
+        int[] coin = new int[n];
         int[] dp = new int[k+1];
+        for (int testCase = 0; testCase < n; testCase++) {
+            coin[testCase] = Integer.parseInt(br.readLine());
+        }
+        Arrays.fill(dp,100001);
+        dp[0] = 0;
 
-        for (int t = 0; t < n; t++) {
-            int coin = Integer.parseInt(br.readLine());
-
-            for (int i = 1; i <= k; i++) {
-
-                if (i - coin > 0) {
-                    dp[i] = dp[i] + dp[i-coin];
-                }
-                else if (i - coin == 0) {
-                    dp[i]++;
-                }
-
+        for (int index = 0; index < coin.length; index++) {
+            for (int i = coin[index]; i <= k; i++) {
+                dp[i] = Math.min(dp[i], dp[i - coin[index]] + 1);
             }
         }
 
-        System.out.print(dp[k]);
+        if (dp[k] == 100001) {
+            dp[k] = -1;
+        }
+        System.out.println(dp[k]);
     }
 }
