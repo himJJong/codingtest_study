@@ -23,7 +23,10 @@ public class boj_20300 {
             // 2 3
             System.out.println(min);
         }
+        // 1 2 3 4  / 5
 
+        // 1 / 2 3 4 5
+        //
         else{
             for(int i=0; i<N/2; i++){ // 1 2 3 4 5
                 min = Math.max(min, data[i]+ data[N-2-i]);
