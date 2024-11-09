@@ -4,104 +4,91 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class boj_2213 {
-    static class Node implements Comparable<Node>{
-        int index;
-        int weight;
+    static List<Integer>[] tree;
+    static int[] weights;
+    static int[][] dp;
+    static boolean[] visited;
+    static PriorityQueue<Integer> selectedNodes = new PriorityQueue<>();
 
-        Node(int index, int weight){
-            this.index = index;
-            this.weight = weight;
-        }
-
-        @Override
-        public int compareTo(Node o){
-            return o.weight - this.weight;
-        }
-    }
-    // 1. 전체 노드의 가중치를 내림차순으로 정려하고,
-    // pq에 넣고, 첫 제일큰거를 기준으로
-    // 집합을찾자 ->  1번으로 풀었을 때 문제예상
-    // 7-> 1(확인) -> 6(확인)
-
-    //
-    static List<Integer>[] list;
-    static PriorityQueue<Integer> nodePq;
-    static PriorityQueue<Integer> answerNodePq = new PriorityQueue<>();
-    static int answer = Integer.MIN_VALUE;
-    static int[] data;
-    static int N;
-    public static void main(String[] args)throws IOException {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        N = Integer.parseInt(br.readLine());
-        data = new int[N+1];
-        String[] point = br.readLine().split(" ");
-        for(int i=1; i<=N; i++){
-            data[i] = Integer.parseInt(point[i-1]);
-        }
-        list = new ArrayList[N+1];
-        for(int i=1; i<=N; i++){
-            list[i] = new ArrayList<>();
+        int N = Integer.parseInt(br.readLine());
+
+        weights = new int[N + 1];
+        String[] weightStr = br.readLine().split(" ");
+        for (int i = 1; i <= N; i++) {
+            weights[i] = Integer.parseInt(weightStr[i - 1]);
         }
 
-        while(true){
-            String line = br.readLine();
-            if(line == null || line.isEmpty()) break;
-            String[] tmp = line.split(" ");
-
-            int from = Integer.parseInt(tmp[0]);
-            int to = Integer.parseInt(tmp[1]);
-
-            list[from].add(to);
-            list[to].add(from);
+        tree = new ArrayList[N + 1];
+        for (int i = 1; i <= N; i++) {
+            tree[i] = new ArrayList<>();
         }
 
-        for(int i=1; i<=N; i++){
-            nodePq = new PriorityQueue<>();
-            int cnt = check(i);
-
-            if(cnt > answer){
-                answerNodePq.clear();
-                while(!nodePq.isEmpty()){
-                    answerNodePq.add(nodePq.poll());
-                }
-                answer = cnt;
-            }
+        String line;
+        while ((line = br.readLine()) != null && !line.isEmpty()) {
+            String[] edge = line.split(" ");
+            int u = Integer.parseInt(edge[0]);
+            int v = Integer.parseInt(edge[1]);
+            tree[u].add(v);
+            tree[v].add(u);
         }
 
+        dp = new int[N + 1][2]; // 각각의 노드가 독립 집합에 포함되지 않는 경우와 포함되는 경우
+        visited = new boolean[N + 1];
+
+        dfs(1);
         StringBuilder sb = new StringBuilder();
-        sb.append(answer).append("\n");
+        int maxWeight = Math.max(dp[1][0], dp[1][1]);
+        sb.append(maxWeight).append("\n");
 
-        while(!answerNodePq.isEmpty()){
-            sb.append(answerNodePq.poll()).append(" ");
+        visited = new boolean[N + 1];
+        if (dp[1][1] >= dp[1][0]) {
+            trace(1, 1);
+        } else {
+            trace(1, 0);
         }
-        System.out.print(sb.toString());
+
+        while(!selectedNodes.isEmpty()){
+            sb.append(selectedNodes.poll()).append(" ");
+        }
+
+        System.out.println(sb.toString());
     }
 
-    private static int check(int val) {
-        HashSet<Integer> set = new HashSet<>();
-        PriorityQueue<Node> pq = new PriorityQueue<>();
-        pq.add(new Node(val, data[val]));
-        int total = 0;
+    private static void dfs(int node) {
+        visited[node] = true;
+        dp[node][0] = 0;
+        dp[node][1] = weights[node];
 
-        while(!pq.isEmpty()){
-            Node cur = pq.poll();
+        for (int child : tree[node]) {
+            if (!visited[child]) {
+                dfs(child);
+                dp[node][0] += Math.max(dp[child][0], dp[child][1]);
+                dp[node][1] += dp[child][0];
+            }
+        }
+    }
 
-            if(!set.contains(cur.index)){
-                set.add(cur.index);
-                nodePq.add(cur.index);
-                total += cur.weight;
-
-                set.addAll(list[cur.index]);
-
-                for(int i=1; i<=N; i++){
-                    if(!set.contains(i)) pq.add(new Node(i, data[i]));
+    private static void trace(int node, int isSelected) {
+        visited[node] = true;
+        if (isSelected == 1) {
+            selectedNodes.add(node);
+            for (int child : tree[node]) {
+                if (!visited[child]) {
+                    trace(child, 0);
                 }
             }
-        }// 7 1 6 -> visited boolean[], -> 전체 노드 첫시작 지점으로 잡고,
-        // 최댓값 -> HashSet O(1)
-
-        //
-
-        return total;
+        } else {
+            for (int child : tree[node]) {
+                if (!visited[child]) {
+                    if (dp[child][1] >= dp[child][0]) {
+                        trace(child, 1);
+                    } else {
+                        trace(child, 0);
+                    }
+                }
+            }
+        }
     }
 }
