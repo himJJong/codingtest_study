@@ -54,5 +54,5 @@ public class boj_11060 {
                 q.add(new Node(moveX, data[moveX], cur.cnt + 1));
             }
         }
-    }
+    }// visited 방문처리가 됐으면 -
 }
